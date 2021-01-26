@@ -1,6 +1,9 @@
 package xadres;
 
+import tabuleiroJogo.Posicao;
 import tabuleiroJogo.Tabuleiro;
+import xadres.peca.Rei;
+import xadres.peca.Torre;
 
 public class PartidaXadres {
 	
@@ -8,6 +11,7 @@ public class PartidaXadres {
 	
 	public PartidaXadres() {
 		tabuleiro = new Tabuleiro(8,8);
+		posicaoInicial();
 	}
 	
 	public  PecaXadres[][] getPeca(){
@@ -20,5 +24,9 @@ public class PartidaXadres {
 		return mat;
 	}
 
-	
+	private void posicaoInicial() {
+		tabuleiro.colocarPeca(new Torre(tabuleiro, Cor.BRANCO), new Posicao(0, 0));
+		tabuleiro.colocarPeca(new Rei(tabuleiro, Cor.BRANCO), new Posicao(0, 4));
+		tabuleiro.colocarPeca(new Rei(tabuleiro, Cor.BRANCO), new Posicao(7, 4));
+	}
 }

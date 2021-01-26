@@ -1,20 +1,20 @@
 package xadres;
 
-import java.awt.Color;
+
 import tabuleiroJogo.Peca;
 import tabuleiroJogo.Tabuleiro;
 
 public class PecaXadres extends Peca {
 	
-	private Color color;
+	private Cor cor;
 
-	public PecaXadres(Tabuleiro tabuleiro, Color color) {
+	public PecaXadres(Tabuleiro tabuleiro, Cor cor) {
 		super(tabuleiro);
-		this.color = color;
+		this.cor = cor;
 	}
 
-	public Color getColor() {
-		return color;
+	public Cor getCor() {
+		return cor;
 	}
 
 }

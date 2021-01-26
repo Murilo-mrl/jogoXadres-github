@@ -13,15 +13,16 @@ public class UI {
 			}
 			System.out.println();
 		}
-		System.out.println("   a b c d e f g h");
+		System.out.println("  a b c d e f g h");
 	}
 		private static void imprimirPeca(PecaXadres peca) {
 			if(peca == null){
-				System.out.print(" -");
+				System.out.print("-");
 			}
 			else {
-				System.out.println(peca);
+				System.out.print(peca);
 		}
+			System.out.print(" ");
 	}
 
 }
