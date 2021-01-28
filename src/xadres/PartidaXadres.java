@@ -1,5 +1,7 @@
 package xadres;
 
+import tabuleiroJogo.Peca;
+import tabuleiroJogo.Posicao;
 import tabuleiroJogo.Tabuleiro;
 import xadres.peca.Rei;
 import xadres.peca.Torre;
@@ -23,6 +25,28 @@ public class PartidaXadres {
 		return mat;
 	}
 	
+	public PecaXadres executarMovimentoXadres(PosicaoXadres posicaoOrigem, PosicaoXadres posicaoDestino) {
+		Posicao origem = posicaoOrigem.paraPosicao();
+		Posicao destino = posicaoDestino.paraPosicao();
+		validarPosicaoOriginal(origem);
+		Peca pecaCapturada = fazerMovimento(origem, destino);
+		return (PecaXadres)pecaCapturada;
+	}
+	
+	private Peca fazerMovimento(Posicao origem, Posicao destino){
+		Peca p = tabuleiro.removerPeca(origem);
+		Peca pecaCapturada = tabuleiro.removerPeca(destino);
+		tabuleiro.colocarPeca(p, destino);
+		return pecaCapturada;
+	}
+	
+	
+	private void validarPosicaoOriginal(Posicao posicao) {
+		if (!tabuleiro.temUmaPeca(posicao)) {
+			throw new XadresExcecao("Não tem uma peça na posição de origem");
+		}
+	}
+		
 	private void colocarNovaPeca(char coluna, int linha, PecaXadres peca) {
 		tabuleiro.colocarPeca(peca, new PosicaoXadres(coluna, linha).paraPosicao());
 	}
