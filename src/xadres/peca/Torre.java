@@ -15,4 +15,10 @@ public class Torre extends PecaXadres {
 	public String toString() {
 		return "R";
 	}
+	
+	@Override
+	public boolean[][] possiveisMovimentos() {
+		boolean[][] mat = new boolean[getTabuleiro().getLinha()][getTabuleiro().getColuna()];
+		return mat;
+	}
 }

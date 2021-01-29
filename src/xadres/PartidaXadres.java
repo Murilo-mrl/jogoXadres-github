@@ -45,6 +45,9 @@ public class PartidaXadres {
 		if (!tabuleiro.temUmaPeca(posicao)) {
 			throw new XadresExcecao("Não tem uma peça na posição de origem");
 		}
+		if (!tabuleiro.peca(posicao).haAlgumPossivelMovimento()) {
+			throw new XadresExcecao("Nao existe movimentos possiveis para a peca escolhida");
+		}
 	}
 		
 	private void colocarNovaPeca(char coluna, int linha, PecaXadres peca) {

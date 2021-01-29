@@ -15,4 +15,10 @@ public class Rei extends PecaXadres {
 	public String toString() {
 		return "K";
 	}
+
+	@Override
+	public boolean[][] possiveisMovimentos() {
+		boolean[][] mat = new boolean[getTabuleiro().getLinha()][getTabuleiro().getColuna()];
+		return mat;
+	}
 }
