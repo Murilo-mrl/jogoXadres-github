@@ -25,6 +25,12 @@ public class PartidaXadres {
 		return mat;
 	}
 	
+	public boolean[][] possiveisMovimentos(PosicaoXadres posicaoOrigem){
+		Posicao posicao = posicaoOrigem.paraPosicao();
+		validarPosicaoOriginal(posicao);
+		return tabuleiro.peca(posicao).possiveisMovimentos();
+	}
+	
 	public PecaXadres executarMovimentoXadres(PosicaoXadres posicaoOrigem, PosicaoXadres posicaoDestino) {
 		Posicao origem = posicaoOrigem.paraPosicao();
 		Posicao destino = posicaoDestino.paraPosicao();
@@ -33,7 +39,7 @@ public class PartidaXadres {
 		Peca pecaCapturada = fazerMovimento(origem, destino);
 		return (PecaXadres)pecaCapturada;
 	}
-	
+		
 	private Peca fazerMovimento(Posicao origem, Posicao destino){
 		Peca p = tabuleiro.removerPeca(origem);
 		Peca pecaCapturada = tabuleiro.removerPeca(destino);

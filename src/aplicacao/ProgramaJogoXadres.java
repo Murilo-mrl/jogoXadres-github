@@ -23,6 +23,10 @@ public class ProgramaJogoXadres {
 			System.out.print("Origem: ");
 			PosicaoXadres origem = UI.lerPosicaoXadres(sc);
 			
+			boolean[][] possiveisMovimentos = partidaXadres1.possiveisMovimentos(origem);
+			UI.limparTela();
+			UI.imprimirTabuleiro(partidaXadres1.getPeca(), possiveisMovimentos);
+			
 			System.out.println();
 			System.out.print("Destino: ");
 			PosicaoXadres destino = UI.lerPosicaoXadres(sc);
