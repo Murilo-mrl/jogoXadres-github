@@ -1,5 +1,8 @@
 package xadres;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import tabuleiroJogo.Peca;
 import tabuleiroJogo.Posicao;
 import tabuleiroJogo.Tabuleiro;
@@ -11,6 +14,9 @@ public class PartidaXadres {
 	private int turno;
 	private Cor jogadorAtual;
 	private Tabuleiro tabuleiro;
+	
+	private List<Peca> pecasNoTabuleiro = new ArrayList<>();
+	private List<Peca> pecasCapturadas = new ArrayList<>();
 	
 	public PartidaXadres() {
 		tabuleiro = new Tabuleiro(8,8);
@@ -57,6 +63,11 @@ public class PartidaXadres {
 		Peca p = tabuleiro.removerPeca(origem);
 		Peca pecaCapturada = tabuleiro.removerPeca(destino);
 		tabuleiro.colocarPeca(p, destino);
+		
+		if (pecaCapturada != null) {
+			pecasNoTabuleiro.remove(pecaCapturada);
+			pecasCapturadas.add(pecaCapturada);
+		}
 		return pecaCapturada;
 	}	
 	
@@ -86,6 +97,7 @@ public class PartidaXadres {
 		
 	private void colocarNovaPeca(char coluna, int linha, PecaXadres peca) {
 		tabuleiro.colocarPeca(peca, new PosicaoXadres(coluna, linha).paraPosicao());
+		pecasNoTabuleiro.add(peca);
 	}
 
 	private void posicaoInicial() {
