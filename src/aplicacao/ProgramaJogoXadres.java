@@ -18,7 +18,7 @@ public class ProgramaJogoXadres {
 	while(true) {
 		try {
 			UI.limparTela();
-			UI.imprimirTabuleiro(partidaXadres1.getPeca());
+			UI.imprimirPartida(partidaXadres1);
 			System.out.println();
 			System.out.print("Origem: ");
 			PosicaoXadres origem = UI.lerPosicaoXadres(sc);

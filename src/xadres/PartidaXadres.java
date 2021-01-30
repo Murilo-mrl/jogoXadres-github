@@ -8,11 +8,23 @@ import xadres.peca.Torre;
 
 public class PartidaXadres {
 	
+	private int turno;
+	private Cor jogadorAtual;
 	private Tabuleiro tabuleiro;
 	
 	public PartidaXadres() {
 		tabuleiro = new Tabuleiro(8,8);
+		turno = 1;
+		jogadorAtual = Cor.BRANCO;
 		posicaoInicial();
+	}
+	
+	public int getTurno() {
+		return turno;
+	}
+	
+	public Cor getJogadorAtual() {
+		return jogadorAtual;
 	}
 	
 	public  PecaXadres[][] getPeca(){
@@ -37,6 +49,7 @@ public class PartidaXadres {
 		validarPosicaoOriginal(origem);
 		ValidarPosicaoDestino(origem, destino);
 		Peca pecaCapturada = fazerMovimento(origem, destino);
+		proximoTurno();
 		return (PecaXadres)pecaCapturada;
 	}
 		
@@ -45,12 +58,14 @@ public class PartidaXadres {
 		Peca pecaCapturada = tabuleiro.removerPeca(destino);
 		tabuleiro.colocarPeca(p, destino);
 		return pecaCapturada;
-	}
-	
+	}	
 	
 	private void validarPosicaoOriginal(Posicao posicao) {
 		if (!tabuleiro.temUmaPeca(posicao)) {
 			throw new XadresExcecao("Não tem uma peça na posição de origem");
+		}
+		if ( jogadorAtual != ((PecaXadres)tabuleiro.peca(posicao)).getCor()) {
+			throw new XadresExcecao("A peca escolhida nao e sua");
 		}
 		if (!tabuleiro.peca(posicao).haAlgumPossivelMovimento()) {
 			throw new XadresExcecao("Nao existe movimentos possiveis para a peca escolhida");
@@ -61,6 +76,12 @@ public class PartidaXadres {
 		if (!tabuleiro.peca(origem).possivelMovimento(destino)) {
 			throw new XadresExcecao("A peca escolhida nao pode ser movida para a posicao de destino");
 		}
+	}
+	
+	private void proximoTurno() {
+		turno ++;
+		jogadorAtual = (jogadorAtual == Cor.BRANCO) ? Cor.PRETO : Cor.BRANCO;
+		// "?" = (então) e ":" = ( caso contrário)
 	}
 		
 	private void colocarNovaPeca(char coluna, int linha, PecaXadres peca) {

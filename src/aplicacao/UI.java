@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import xadres.Cor;
+import xadres.PartidaXadres;
 import xadres.PecaXadres;
 import xadres.PosicaoXadres;
 
@@ -45,6 +46,13 @@ public class UI {
 		catch(RuntimeException e){
 			throw new InputMismatchException("Erro ao ler PosicaoXadres. Valores validos sao de a1 a h8.");
 		}
+	}
+	
+	public static void imprimirPartida(PartidaXadres partidaXadres) {
+		imprimirTabuleiro(partidaXadres.getPeca());
+		System.out.println();
+		System.out.println("Turno: " + partidaXadres.getTurno());
+		System.out.println("Aguardando jogador: " + partidaXadres.getJogadorAtual());
 	}
 	
 	public static void imprimirTabuleiro(PecaXadres[][] pecas) {
