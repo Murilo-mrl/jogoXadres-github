@@ -87,7 +87,8 @@ public class PartidaXadres {
 	}
 		
 	private Peca fazerMovimento(Posicao origem, Posicao destino){
-		Peca p = tabuleiro.removerPeca(origem);
+		PecaXadres p = (PecaXadres)tabuleiro.removerPeca(origem);
+		p.incrementaMovimento();
 		Peca pecaCapturada = tabuleiro.removerPeca(destino);
 		tabuleiro.colocarPeca(p, destino);
 		
@@ -99,7 +100,8 @@ public class PartidaXadres {
 	}	
 	
 	private void desfazerMovimento(Posicao origem, Posicao destino, Peca pecaCapturada) {
-		Peca p = tabuleiro.removerPeca(destino);
+		PecaXadres p = (PecaXadres)tabuleiro.removerPeca(destino);
+		p.decrementaMovimento();
 		tabuleiro.colocarPeca(p, origem);
 		
 		if (pecaCapturada != null) {
@@ -192,19 +194,19 @@ public class PartidaXadres {
 
 	private void posicaoInicial() {
 		
-		//colocarNovaPeca('c', 1, new Torre(tabuleiro, Cor.BRANCO));
-        //colocarNovaPeca('c', 2, new Torre(tabuleiro, Cor.BRANCO));
-        //colocarNovaPeca('d', 2, new Torre(tabuleiro, Cor.BRANCO));
-        colocarNovaPeca('h', 7, new Torre(tabuleiro, Cor.BRANCO));
-        colocarNovaPeca('d', 1, new Torre(tabuleiro, Cor.BRANCO));
-        colocarNovaPeca('e', 1, new Rei(tabuleiro, Cor.BRANCO));
+		colocarNovaPeca('c', 1, new Torre(tabuleiro, Cor.BRANCO));
+        colocarNovaPeca('c', 2, new Torre(tabuleiro, Cor.BRANCO));
+        colocarNovaPeca('d', 2, new Torre(tabuleiro, Cor.BRANCO));
+        colocarNovaPeca('e', 2, new Torre(tabuleiro, Cor.BRANCO));
+        colocarNovaPeca('e', 1, new Torre(tabuleiro, Cor.BRANCO));
+        colocarNovaPeca('d', 1, new Rei(tabuleiro, Cor.BRANCO));
 
-      //  colocarNovaPeca('c', 7, new Torre(tabuleiro, Cor.PRETO));
-      //  colocarNovaPeca('c', 8, new Torre(tabuleiro, Cor.PRETO));
-      //  colocarNovaPeca('d', 7, new Torre(tabuleiro, Cor.PRETO));
-      // colocarNovaPeca('e', 7, new Torre(tabuleiro, Cor.PRETO));
-        colocarNovaPeca('b', 8, new Torre(tabuleiro, Cor.PRETO));
-        colocarNovaPeca('a', 8, new Rei(tabuleiro, Cor.PRETO));
+        colocarNovaPeca('c', 7, new Torre(tabuleiro, Cor.PRETO));
+        colocarNovaPeca('c', 8, new Torre(tabuleiro, Cor.PRETO));
+        colocarNovaPeca('d', 7, new Torre(tabuleiro, Cor.PRETO));
+        colocarNovaPeca('e', 7, new Torre(tabuleiro, Cor.PRETO));
+        colocarNovaPeca('e', 8, new Torre(tabuleiro, Cor.PRETO));
+        colocarNovaPeca('d', 8, new Rei(tabuleiro, Cor.PRETO));
 		
 		
 	}
