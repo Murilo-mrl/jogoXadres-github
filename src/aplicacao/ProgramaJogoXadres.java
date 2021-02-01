@@ -18,7 +18,7 @@ public class ProgramaJogoXadres {
 		PartidaXadres partidaXadres1 = new PartidaXadres();
 		List<PecaXadres> capturada = new ArrayList<>();
 
-		while (true) {
+		while (!partidaXadres1.getCheckMate()) {
 			try {
 				UI.limparTela();
 				UI.imprimirPartida(partidaXadres1, capturada);
@@ -50,6 +50,8 @@ public class ProgramaJogoXadres {
 				sc.nextLine();
 			}
 		}
+		UI.limparTela();
+		UI.imprimirPartida(partidaXadres1, capturada);
 
 	}
 
