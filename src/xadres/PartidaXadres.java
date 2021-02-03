@@ -1,8 +1,11 @@
 package xadres;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
 import tabuleiroJogo.Peca;
 import tabuleiroJogo.Posicao;
@@ -22,6 +25,7 @@ public class PartidaXadres {
 	private boolean check;
 	private boolean checkMate;
 	private PecaXadres vulneravelAEnPassant;
+	private PecaXadres promovido;
 
 	private List<Peca> pecasNoTabuleiro = new ArrayList<>();
 	private List<Peca> pecasCapturadas = new ArrayList<>();
@@ -51,6 +55,10 @@ public class PartidaXadres {
 	
 	public PecaXadres getVulneravelAEnPassant() {
 		return vulneravelAEnPassant;
+	}
+	
+	public PecaXadres getPromovido() {
+		return promovido;
 	}
 
 	public PecaXadres[][] getPeca() {
@@ -83,7 +91,17 @@ public class PartidaXadres {
 		}
 		
 		PecaXadres pecaMovida =(PecaXadres)tabuleiro.peca(destino);
-
+		
+		promovido = null;
+		if(pecaMovida instanceof Peao) {
+			if((pecaMovida.getCor() == Cor.BRANCO && destino.getLinha() == 0) || (pecaMovida.getCor() == Cor.PRETO && destino.getLinha() == 7)) {
+				promovido = (PecaXadres)tabuleiro.peca(destino);
+				promovido = substituirPecaPromovida("Q");
+			}
+		}
+		
+		
+		
 		check = (testaCheck(oponente(jogadorAtual))) ? true : false;
 
 		if (testaCheckMate(oponente(jogadorAtual))) {
@@ -101,6 +119,37 @@ public class PartidaXadres {
 		}
 
 		return (PecaXadres) pecaCapturada;
+	}
+	
+	public PecaXadres substituirPecaPromovida(String tipo) {
+		if (promovido == null) {
+			throw new IllegalStateException("Nao ha peca a ser promovida");
+			
+		}
+		if (!tipo.equals("B") && !tipo.equals("N") && !tipo.equals("R") && !tipo.equals("Q")) {
+			throw new InvalidParameterException("Tipo invalido para promocao");
+			
+		}
+		
+		Posicao pos = promovido.getPosicaoXadres().paraPosicao();
+		Peca p = tabuleiro.removerPeca(pos);
+		pecasNoTabuleiro.remove(p);
+		
+		PecaXadres  novaPeca = novaPeca(tipo, promovido.getCor());
+		tabuleiro.colocarPeca(novaPeca, pos);
+		pecasNoTabuleiro.add(novaPeca);
+		
+		return novaPeca;
+		
+	}
+	
+	private PecaXadres novaPeca(String tipo, Cor cor) {
+		if (tipo.equals("B")) return new Bispo(tabuleiro, cor);
+		if (tipo.equals("N")) return new Cavalo(tabuleiro, cor);
+		if (tipo.equals("Q")) return new Rainha(tabuleiro, cor);
+		return new Bispo(tabuleiro, cor);
+	
+	
 	}
 
 	private Peca fazerMovimento(Posicao origem, Posicao destino) {

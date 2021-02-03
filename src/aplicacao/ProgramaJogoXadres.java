@@ -40,6 +40,11 @@ public class ProgramaJogoXadres {
 					capturada.add(pecaCapturada);
 				}
 				
+				if (partidaXadres1.getPromovido() != null) {
+					System.out.print("Informe a peca para promocao (B/N/R/Q): ");
+					String tipo = sc.nextLine();
+					partidaXadres1.substituirPecaPromovida(tipo);
+				}
 			} 
 			catch (XadresExcecao e) {
 				System.out.println(e.getMessage());
