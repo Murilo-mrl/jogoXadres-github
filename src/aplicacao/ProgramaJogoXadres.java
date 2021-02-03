@@ -35,22 +35,24 @@ public class ProgramaJogoXadres {
 				PosicaoXadres destino = UI.lerPosicaoXadres(sc);
 
 				PecaXadres pecaCapturada = partidaXadres1.executarMovimentoXadres(origem, destino);
-				
-				if(pecaCapturada != null) {
+
+				if (pecaCapturada != null) {
 					capturada.add(pecaCapturada);
 				}
-				
+
 				if (partidaXadres1.getPromovido() != null) {
 					System.out.print("Informe a peca para promocao (B/N/R/Q): ");
-					String tipo = sc.nextLine();
+					String tipo = sc.nextLine().toUpperCase();
+					while (!tipo.equals("B") && !tipo.equals("N") && !tipo.equals("R") && !tipo.equals("Q")) {
+						System.out.print("Informe a peca para promocao (B/N/R/Q): ");
+						tipo = sc.nextLine().toUpperCase();
+					}
 					partidaXadres1.substituirPecaPromovida(tipo);
 				}
-			} 
-			catch (XadresExcecao e) {
+			} catch (XadresExcecao e) {
 				System.out.println(e.getMessage());
 				sc.nextLine();
-			} 
-			catch (InputMismatchException e) {
+			} catch (InputMismatchException e) {
 				System.out.println(e.getMessage());
 				sc.nextLine();
 			}

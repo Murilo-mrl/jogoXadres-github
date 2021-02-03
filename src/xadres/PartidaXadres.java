@@ -1,11 +1,8 @@
 package xadres;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
 import tabuleiroJogo.Peca;
 import tabuleiroJogo.Posicao;
@@ -127,7 +124,7 @@ public class PartidaXadres {
 			
 		}
 		if (!tipo.equals("B") && !tipo.equals("N") && !tipo.equals("R") && !tipo.equals("Q")) {
-			throw new InvalidParameterException("Tipo invalido para promocao");
+			return promovido;
 			
 		}
 		
@@ -147,7 +144,7 @@ public class PartidaXadres {
 		if (tipo.equals("B")) return new Bispo(tabuleiro, cor);
 		if (tipo.equals("N")) return new Cavalo(tabuleiro, cor);
 		if (tipo.equals("Q")) return new Rainha(tabuleiro, cor);
-		return new Bispo(tabuleiro, cor);
+		return new Torre(tabuleiro, cor);
 	
 	
 	}
